@@ -1,17 +1,33 @@
 import turtle
-from random import choice
-color_list = ['alice blue','AliceBlue','antique white','AntiqueWhite','AntiqueWhite1','AntiqueWhite2','AntiqueWhite3','AntiqueWhite4','aquamarine','aquamarine1','aquamarine2','aquamarine3','aquamarine4','azure','azure1','azure2','azure3','azure4','beige','bisque','bisque1','bisque2','bisque3','bisque4','black','BlanchedAlmond']
-s = turtle.Screen()
-s.bgcolor("maroon")
-s.title("Turtle")
-tut = turtle.Turtle()
-tut.goto(0, -150)
-var = 200
+import time
+from turtle import Turtle, Screen
 
 
-for i in range(40):
-    tut.circle(var)
-    var -= 5
-    tut.color(choice(color_list))
-turtle.done()
+class SnakeFeeder:
+    def __init__(self):
+        self.snake = [Turtle(), Turtle(), Turtle()]
+        self.screen = Screen()
+        self.screen.delay(5)
+        self.screen.screensize(500, 500, "black")
 
+        count = 10
+        for part in self.snake:
+            part.penup()
+            part.color("white")
+            part.shape("square")
+            part.setpos(count, 0)
+            count -= 20
+
+    def snake_forward(self):
+        while True:
+            self.screen.update()
+            for part in self.snake:
+                part.forward(20)
+                time.sleep(1)
+
+
+
+if __name__ == "__main__":
+    sf = SnakeFeeder()
+    sf.snake_forward()
+    turtle.done()
